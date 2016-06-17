@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G12a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Tic_Tac_Toe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -15,11 +18,71 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="board.png" translatesAutoresizingMaskIntoConstraints="NO" id="2xk-Mi-vgK">
+                                <rect key="frame" x="113" y="112" width="375" height="375"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="350" id="3U4-Ff-haj"/>
+                                    <constraint firstAttribute="width" constant="580" id="6dS-W2-jXn"/>
+                                    <constraint firstAttribute="height" constant="375" id="Cda-pL-efA"/>
+                                    <constraint firstAttribute="width" constant="350" id="QyU-lT-ivV"/>
+                                    <constraint firstAttribute="height" constant="580" id="inV-fC-6YA"/>
+                                    <constraint firstAttribute="height" constant="390" id="oMl-V3-To8"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="375" id="phz-Nt-1VC"/>
+                                    <constraint firstAttribute="width" constant="375" id="qBh-L1-Ci7"/>
+                                    <constraint firstAttribute="width" constant="390" id="qcN-tW-PO7"/>
+                                    <constraint firstAttribute="height" constant="350" id="yKQ-Se-Sfw"/>
+                                    <constraint firstAttribute="width" secondItem="2xk-Mi-vgK" secondAttribute="height" multiplier="1:1" id="zaH-AE-WRM"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="3U4-Ff-haj"/>
+                                        <exclude reference="6dS-W2-jXn"/>
+                                        <exclude reference="QyU-lT-ivV"/>
+                                        <exclude reference="inV-fC-6YA"/>
+                                        <exclude reference="oMl-V3-To8"/>
+                                        <exclude reference="qcN-tW-PO7"/>
+                                        <exclude reference="yKQ-Se-Sfw"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pLh-HQ-o6o">
+                                <rect key="frame" x="127" y="121" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="c0B-Mu-rw8"/>
+                                    <constraint firstAttribute="width" constant="100" id="lg0-A5-sTG"/>
+                                </constraints>
+                                <state key="normal" image="nought.png"/>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2xk-Mi-vgK" firstAttribute="top" secondItem="pLh-HQ-o6o" secondAttribute="bottom" constant="-109" id="33R-GT-eyM"/>
+                            <constraint firstItem="2xk-Mi-vgK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3ET-bg-lND"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="2xk-Mi-vgK" secondAttribute="trailing" constant="-10" id="3Xy-HE-MsJ"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="2xk-Mi-vgK" secondAttribute="bottom" id="4fQ-IV-JX3"/>
+                            <constraint firstItem="2xk-Mi-vgK" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Aza-bf-d9t"/>
+                            <constraint firstItem="2xk-Mi-vgK" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="aOh-7E-Bhq"/>
+                            <constraint firstItem="2xk-Mi-vgK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-10" id="nsG-gQ-kL1"/>
+                            <constraint firstItem="2xk-Mi-vgK" firstAttribute="leading" secondItem="pLh-HQ-o6o" secondAttribute="trailing" constant="-114" id="pHM-lO-THH"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="3Xy-HE-MsJ"/>
+                                <exclude reference="aOh-7E-Bhq"/>
+                                <exclude reference="nsG-gQ-kL1"/>
+                                <exclude reference="4fQ-IV-JX3"/>
+                            </mask>
+                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="305" y="429"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="board.png" width="744" height="783"/>
+        <image name="nought.png" width="214" height="214"/>
+    </resources>
 </document>
