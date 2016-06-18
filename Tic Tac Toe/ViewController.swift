@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     var activePLayer = 1 // 1 = noughts, 2 = crosses
     
     var gameState = [0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -18,25 +18,54 @@ class ViewController: UIViewController {
     
     var gameActive = true
     
-    @IBOutlet weak var gameOver: UILabel!
+    @IBOutlet weak var playAgainButton: UIButton!
     
-    @IBOutlet weak var button: UIButton!
-    
-    @IBAction func buttonPressed(sender: AnyObject) {
+    @IBAction func playAgainButton(sender: AnyObject) {
         
-        if (gameState[sender.tag] == 0 && gameActive == true) {
+        gameState = [0, 0, 0, 0, 0, 0, 0, 0, 0]
         
-            gameState[sender.tag] = activePLayer
+        activePLayer = 1
+        
+        gameActive = true
+        
+        gameOver.hidden = true
+        
+        gameOver.center = CGPointMake(gameOver.center.x - 500, gameOver.center.y)
+        
+        playAgainButton.hidden = true
+        
+        playAgainButton.center = CGPointMake(playAgainButton.center.x - 500, playAgainButton.center.y)
+        
+        var buttonToClear : UIButton
+        
+        for var i = 0; i < 9; i++ {
             
+            buttonToClear = view.viewWithTag(i) as! UIButton
+            
+            buttonToClear.setImage(nil, forState: .Normal)
+        }
+        
+    }
+
+@IBOutlet weak var gameOver: UILabel!
+
+@IBOutlet weak var button: UIButton!
+
+@IBAction func buttonPressed(sender: AnyObject) {
+    
+    if (gameState[sender.tag] == 0 && gameActive == true) {
+        
+        gameState[sender.tag] = activePLayer
+        
         if activePLayer == 1 {
-        
-        
-        sender.setImage(UIImage(named: "nought.png"), forState: .Normal)
-        
+            
+            
+            sender.setImage(UIImage(named: "nought.png"), forState: .Normal)
+            
             activePLayer = 2
             
             
-        
+            
         } else {
             
             sender.setImage(UIImage(named: "cross.png"), forState: .Normal)
@@ -45,55 +74,62 @@ class ViewController: UIViewController {
             
             
             
-            }
+        }
+        
+        for combination in winningCombinations {
             
-            for combination in winningCombinations {
+            if (gameState[combination[0]] != 0 && gameState[combination[0]] == gameState[combination[1]] && gameState[combination[1]] == gameState[combination[2]]) {
                 
-                if (gameState[combination[0]] != 0 && gameState[combination[0]] == gameState[combination[1]] && gameState[combination[1]] == gameState[combination[2]]) {
+                gameActive = false
+                
+                if gameState[combination[0]] == 1 {
                     
-                    gameActive = false
+                    gameOver.text = "Noughts have won!"
                     
-                    if gameState[combination[0]] == 1 {
-                        
-                        gameOver.text = "Noughts have won!"
-                        
-                    } else {
-                        
-                        gameOver.text = "Crosses have won!"
-                    }
+                } else {
                     
-                    gameOver.hidden = false
-                    
-                    UIView.animateWithDuration(0.5, animations: {
-                        
-                    self.gameOver.center = CGPointMake(self.gameOver.center.x + 500, self.gameOver.center.y)
-                        
-                    })
+                    gameOver.text = "Crosses have won!"
                 }
                 
+                gameOver.hidden = false
+                playAgainButton.hidden = false
+                
+                UIView.animateWithDuration(0.5, animations: {
+                    
+                    self.gameOver.center = CGPointMake(self.gameOver.center.x + 500, self.gameOver.center.y)
+                    
+                    self.playAgainButton.center = CGPointMake(self.playAgainButton.center.x + 500, self.playAgainButton.center.y)
+                    
+                })
             }
             
         }
         
     }
     
-    
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        gameOver.hidden = true
-        
-        gameOver.center = CGPointMake(gameOver.center.x - 500, gameOver.center.y)
-        
-    }
+}
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+
+
+
+override func viewDidLoad() {
+    super.viewDidLoad()
+    // Do any additional setup after loading the view, typically from a nib.
+    
+    gameOver.hidden = true
+    
+    gameOver.center = CGPointMake(gameOver.center.x - 500, gameOver.center.y)
+    
+    playAgainButton.hidden = true
+    
+    playAgainButton.center = CGPointMake(playAgainButton.center.x - 500, playAgainButton.center.y)
+    
+}
+
+override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+}
 
 
 }
