@@ -38,7 +38,7 @@ class ViewController: UIViewController {
         
         var buttonToClear : UIButton
         
-        for var i = 0; i < 9; i++ {
+        for var i = 0; i < 9; i = i + 1 {
             
             buttonToClear = view.viewWithTag(i) as! UIButton
             
@@ -46,91 +46,119 @@ class ViewController: UIViewController {
         }
         
     }
-
-@IBOutlet weak var gameOver: UILabel!
-
-@IBOutlet weak var button: UIButton!
-
-@IBAction func buttonPressed(sender: AnyObject) {
     
-    if (gameState[sender.tag] == 0 && gameActive == true) {
+    @IBOutlet weak var gameOver: UILabel!
+    
+    @IBOutlet weak var button: UIButton!
+    
+    @IBAction func buttonPressed(sender: AnyObject) {
         
-        gameState[sender.tag] = activePLayer
-        
-        if activePLayer == 1 {
+        if (gameState[sender.tag] == 0 && gameActive == true) {
             
+            gameState[sender.tag] = activePLayer
             
-            sender.setImage(UIImage(named: "nought.png"), forState: .Normal)
-            
-            activePLayer = 2
-            
-            
-            
-        } else {
-            
-            sender.setImage(UIImage(named: "cross.png"), forState: .Normal)
-            
-            activePLayer = 1
-            
-            
-            
-        }
-        
-        for combination in winningCombinations {
-            
-            if (gameState[combination[0]] != 0 && gameState[combination[0]] == gameState[combination[1]] && gameState[combination[1]] == gameState[combination[2]]) {
+            if activePLayer == 1 {
                 
-                gameActive = false
                 
-                if gameState[combination[0]] == 1 {
+                sender.setImage(UIImage(named: "nought.png"), forState: .Normal)
+                
+                activePLayer = 2
+                
+                
+                
+            } else {
+                
+                sender.setImage(UIImage(named: "cross.png"), forState: .Normal)
+                
+                activePLayer = 1
+                
+                
+                
+            }
+            
+            for combination in winningCombinations {
+                
+                if (gameState[combination[0]] != 0 && gameState[combination[0]] == gameState[combination[1]] && gameState[combination[1]] == gameState[combination[2]]) {
                     
-                    gameOver.text = "Noughts have won!"
+                    gameActive = false
                     
-                } else {
+                    if gameState[combination[0]] == 1 {
+                        
+                        gameOver.text = "Noughts have won!"
+                        
+                    } else {
+                        
+                        gameOver.text = "Crosses have won!"
+                    }
                     
-                    gameOver.text = "Crosses have won!"
+                    endGame()
+                    
+                    
                 }
-                
-                gameOver.hidden = false
-                playAgainButton.hidden = false
-                
-                UIView.animateWithDuration(0.5, animations: {
-                    
-                    self.gameOver.center = CGPointMake(self.gameOver.center.x + 500, self.gameOver.center.y)
-                    
-                    self.playAgainButton.center = CGPointMake(self.playAgainButton.center.x + 500, self.playAgainButton.center.y)
-                    
-                })
             }
             
         }
         
+        if gameActive == true {
+            
+            gameActive = false
+            
+            for buttonState in gameState {
+                
+                if buttonState == 0  {
+                    
+                    gameActive = true
+                    
+                }
+            }
+            
+            if gameActive == false {
+                
+                gameOver.text = "It's a draw!"
+                
+                endGame()
+                
+            }
+            
+        }
     }
     
-}
-
-
-
-
-override func viewDidLoad() {
-    super.viewDidLoad()
-    // Do any additional setup after loading the view, typically from a nib.
+    func endGame() {
+        
+        gameOver.hidden = false
+        playAgainButton.hidden = false
+        
+        UIView.animateWithDuration(0.5, animations: {
+            
+            self.gameOver.center = CGPointMake(self.gameOver.center.x + 500, self.gameOver.center.y)
+            
+            self.playAgainButton.center = CGPointMake(self.playAgainButton.center.x + 500, self.playAgainButton.center.y)
+            
+        })
+    }
     
-    gameOver.hidden = true
     
-    gameOver.center = CGPointMake(gameOver.center.x - 500, gameOver.center.y)
     
-    playAgainButton.hidden = true
     
-    playAgainButton.center = CGPointMake(playAgainButton.center.x - 500, playAgainButton.center.y)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+        
+        gameOver.hidden = true
+        
+        gameOver.center = CGPointMake(gameOver.center.x - 500, gameOver.center.y)
+        
+        playAgainButton.hidden = true
+        
+        playAgainButton.center = CGPointMake(playAgainButton.center.x - 500, playAgainButton.center.y)
+        
+    }
     
-}
-
-override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-}
-
-
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    
 }
 
